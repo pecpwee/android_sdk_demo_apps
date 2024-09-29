@@ -1,12 +1,16 @@
 package com.zendesk.messaging_sample;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import zendesk.answerbot.AnswerBotEngine;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+
+import zendesk.chat.ChatConfiguration;
 import zendesk.chat.ChatEngine;
-import zendesk.messaging.MessagingActivity;
-import zendesk.support.SupportEngine;
+import zendesk.chat.PreChatFormFieldStatus;
+import zendesk.classic.messaging.Engine;
+import zendesk.classic.messaging.MessagingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,8 +22,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        ChatConfiguration chatConfiguration = ChatConfiguration.builder()
+                .withAgentAvailabilityEnabled(false)
+                .withPreChatFormEnabled(true)
+                .withNameFieldStatus(PreChatFormFieldStatus.OPTIONAL)
+                .withEmailFieldStatus(PreChatFormFieldStatus.REQUIRED)
+                .withPhoneFieldStatus(PreChatFormFieldStatus.HIDDEN)
+                .withDepartmentFieldStatus(PreChatFormFieldStatus.REQUIRED)
+                .build();
+
         MessagingActivity.builder()
-                .withEngines(AnswerBotEngine.engine(), SupportEngine.engine(), ChatEngine.engine())
+                .withEngines(ChatEngine.engine())
                 .show(this);
     }
 }

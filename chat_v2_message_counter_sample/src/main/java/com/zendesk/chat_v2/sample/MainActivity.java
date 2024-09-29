@@ -6,9 +6,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import zendesk.chat.ChatConfiguration;
+import java.util.ArrayList;
+
 import zendesk.chat.ChatEngine;
-import zendesk.messaging.MessagingActivity;
+import zendesk.classic.messaging.MessagingActivity;
 
 public class MainActivity extends AppCompatActivity implements UnreadMessageCounter.UnreadMessageCounterListener {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements UnreadMessageCoun
         }
         setContentView(R.layout.activity_main);
         final UnreadMessageCounter unreadMessageCounter = new UnreadMessageCounter(this);
+
 
         findViewById(R.id.btnChat).setOnClickListener(new View.OnClickListener() {
             @Override
